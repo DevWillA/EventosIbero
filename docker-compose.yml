@@ -3,7 +3,7 @@ services:
   auth_service:
     build: ./auth_service
     expose:
-      - 8080
+      - "8000:8000"
 
   event_service:
     build: ./event_service
