@@ -8,43 +8,43 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    alloe__methods=["*"],
+    allow_methods=["*"],
     allow_headers=["*"]
 )
 
 cliente = MongoClient("mongodb://mongodb:27017/")
 db = cliente["eventos_db"]
-colection = db["eventos"]
+coleccion = db["eventos"]
 
 @app.get("/eventos")
-async def getEventos():
+async def obtener_eventos():
     eventos = []
-    for evento in colection.find():
+    for evento in coleccion.find():
         evento["_id"] = str(evento["_id"])
         eventos.append(evento)
     return eventos
 
 @app.put("/eventos/{evento_id}")
-async def updateEvento(evento_id: str, nombre: str, fecha: str, lugar: str):
-    resultadp = colection.update_one(
+async def editar_evento(evento_id: str, nombre: str, fecha: str, lugar: str):
+    resultaado = coleccion.update_one(
         {"_id": ObjectId(evento_id)},
         {"$set": {"nombre": nombre, "fecha": fecha, "lugar": lugar}}
 
     )
-    if resultadp.matched_count == 0:
+    if resultaado.matched_count == 0:
         raise HTTPException(status_code=404, detail="Evento no encontrado")
-    return {"mensaje": "Actualizado"}
+    return {"estado": "Actualizado"}
 
 @app.delete("/eventos/{evento_id}")
-async def deleteEvento(evento_id: str):
-    resultado = colection.delete_one({"_id": ObjectId(evento_id)})
+async def elimianr_evento(evento_id: str):
+    resultado = coleccion.delete_one({"_id": ObjectId(evento_id)})
     if resultado.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Evento no encontrado")
-    return {"mensaje": "Eliminado"}
+    return {"estado": "Eliminado"}
 
 @app.post("/eventos")
-async def createEvento(nombre: str, fecha: str, lugar: str):
+async def crear_evento(nombre: str, fecha: str, lugar: str):
     evento = {"nombre": nombre, "fecha": fecha, "lugar": lugar}
-    resultado = colection.insert_one(evento)
+    resultado = coleccion.insert_one(evento)
     evento["_id"] = str(resultado.inserted_id)
     return evento

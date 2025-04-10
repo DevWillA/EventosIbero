@@ -5,7 +5,7 @@ async function crearEventos() {
 
   await fetch(
     `/events/eventos?nombre=?${encodeURIComponent(nombre)}
-    &fecha=?${encodeURIComponent(fecha)}&lugar=?${encodeURIComponent(lugar)}`,
+    &fecha=?${fecha}&lugar=?${encodeURIComponent(lugar)}`,
     { method: 'POST' }
   );
 
@@ -13,23 +13,22 @@ async function crearEventos() {
 }
 
 async function editarEventos(id) {
-  const nuevoNombre = document.getElementById("Nuevo nombre del evento").value;
-  const nuevaFecha = document.getElementById("Nueva Fecha (yyyy-mm-dd)").value;
-  const nuevoLugar = document.getElementById("Nuevo lugar del evento").value;
+  const nuevoNombre = prompt("Nuevo nombre del evento");
+  const nuevaFecha = prompt("Nueva Fecha (yyyy-mm-dd)");
+  const nuevoLugar = prompt("Nuevo lugar del evento");
 
+  nuevoNombre
   await fetch(
-    `/events/eventos?nombre=?${encodeURIComponent(nuevoNombre)}
-        &fecha=?${encodeURIComponent(nuevaFecha)}&lugar=?${encodeURIComponent(
-      nuevoLugar
-    )}`,
-    { method: "PUT" }
+    `/events/eventos/${id}?nombre=${encodeURIComponent(nuevoNombre)}
+    &fecha=${nuevaFecha}&lugar=${encodeURIComponent(nuevoLugar)}`,
+    { method: 'PUT' }
   );
   cargarEventos();
 }
 
 async function eliminarEventos(id) {
   if (confirm("¿Está seguro de que desea eliminar este evento?")) {
-    await fetch(`/events/eventos/${id}`, { method: "DELETE" });
+    await fetch(`/events/eventos/${id}`, { method: 'DELETE' });
     cargarEventos();
   }
 }
@@ -43,7 +42,7 @@ async function cargarEventos() {
   const data = await resp.json();
   let divEventos = document.getElementById("eventos");
   divEventos.innerHTML = "";
-  eventos.forEach((ev) => {
+  eventos.forEach(ev => {
     divEventos.innerHTML += `
     <div class="evento">
     <strong>${ev.nombre}</strong><br>

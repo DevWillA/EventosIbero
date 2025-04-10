@@ -10,12 +10,12 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-usuarios = [{"username": "admin", "password": "1234"}]
+usuarios = [{"usaurio": "admin", "clave": "1234"}]
 
 @app.post("/login")
-async def login(username: str, password: str):
-    for usuario in usuarios:
-        if usuario["username"] == username and usuario["password"] == password:
-            return {"message": "Login successful"}
-    return {"message": "Invalid credentials"}
+async def login(usuario: str, clave: str):
+    for u in usuarios:
+        if u["usuaio"] == usuario and u["clave"] == clave:
+            return {"estado": "exitoso"}
+    return {"estado": "fallido"}
 
