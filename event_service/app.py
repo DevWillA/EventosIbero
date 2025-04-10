@@ -19,7 +19,7 @@ colection = db["eventos"]
 @app.get("/eventos")
 async def getEventos():
     eventos = []
-    for evento in collections.find():
+    for evento in colection.find():
         evento["_id"] = str(evento["_id"])
         eventos.append(evento)
     return eventos

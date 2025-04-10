@@ -48,8 +48,8 @@ async function cargarEventos() {
     <div class="evento">
     <strong>${ev.nombre}</strong><br>
         📅 ${ev.fecha} - 📍 ${ev.lugar}<br>
-        <button onclick="editarEventos(${ev.id})"> 🖋️ Editar</button>
-        <button onclick="eliminarEventos(${ev.id})" style="background:red;"> 🚮 Eliminar</button>
+        <button onclick="editarEventos('${ev._id}')"> 🖋️ Editar</button>
+        <button onclick="eliminarEventos('${ev._id}')" style="background:red;"> 🚮 Eliminar</button>
     </div>`;
   });
 }
