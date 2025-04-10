@@ -6,7 +6,7 @@ async function createEvent() {
   await fetch(
     `/events/eventos?nombre=?${encodeURIComponent(nombre)}
     &fecha=?${encodeURIComponent(fecha)}&lugar=?${encodeURIComponent(lugar)}`,
-    { method: "POST" }
+    { method: 'POST' }
   );
 
   cargarEventos();

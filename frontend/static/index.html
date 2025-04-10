@@ -8,21 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Eventos Comunitarios</h1>
-        <div id ="logi">  
+        <h1>Eventos Comunitarios 📅 </h1>
+        <div id ="login">  
             <h2>Login</h2>
-            <input type="text" id="username" placeholder="Username">
-            <input type="password" id="password" placeholder="Password">
+            <input type="text" id="username" placeholder="username">
+            <input type="password" id="password" placeholder="password">
             <button onclick="login()">Ingresar</button>
             <p id="mensajeLogin"></p>
         </div>
-        <div id="create-event" style="display:none">
+        <div id="crearEventos" style="display:none">
             <h2>Crear Evento</h2>
             <input type="text" id="nombre" placeholder="usuario">
             <input type="date" id="fecha">
             <input type="text" id="lugar" placeholder="Lugar">
             <button onclick="createEvent()">Crear Evento</button>
-            <p id="mensajeEvento"></p>
         </div>
         <div id="eventos"></div>
     </div>
