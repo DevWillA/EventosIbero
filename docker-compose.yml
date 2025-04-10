@@ -1,0 +1,31 @@
+services:
+
+  auth_service:
+    build: ./auth_service
+    expose:
+      - 8080
+
+  event_service:
+    build: ./event_service
+    expose:
+      - 8081
+    depends_on:
+      - mongo_db
+
+  mongo_db:
+    image: mongo:7
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - auth_service
+      - event_service
+
+  volumes:
+    mongo_data:
