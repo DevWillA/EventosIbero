@@ -10,14 +10,14 @@ services:
     expose:
       - 8081
     depends_on:
-      - mongo_db
+      - mongo
 
-  mongo_db:
-    image: mongo:7
+  mongo:
+    image: mongo
     ports:
       - "27018:27017"
     volumes:
-      - mongo_data:/data/db
+      - mongo_db:/data/db
 
   nginx:
     build: ./nginx
@@ -27,5 +27,5 @@ services:
       - auth_service
       - event_service
 
-  volumes:
-    mongo_data:
+volumes:
+  mongo_db:
