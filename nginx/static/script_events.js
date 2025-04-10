@@ -1,4 +1,4 @@
-async function createEvent() {
+async function crearEventos() {
   let nombre = document.getElementById("nombre").value;
   let fecha = document.getElementById("fecha").value;
   let lugar = document.getElementById("lugar").value;
@@ -14,7 +14,7 @@ async function createEvent() {
 
 async function editarEventos(id) {
   const nuevoNombre = document.getElementById("Nuevo nombre del evento").value;
-  const nuevaFecha = document.getElementById("Nueva Fecha").value;
+  const nuevaFecha = document.getElementById("Nueva Fecha (yyyy-mm-dd)").value;
   const nuevoLugar = document.getElementById("Nuevo lugar del evento").value;
 
   await fetch(
@@ -37,6 +37,7 @@ async function eliminarEventos(id) {
 function logout() {
   window.location.href = "index.html";
 }
+
 async function cargarEventos() {
   const resp = await fetch("/events/eventos");
   const data = await resp.json();
